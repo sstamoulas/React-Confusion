@@ -7,31 +7,11 @@ class DishDetail extends Component {
   }
 
   renderComments(comments) {
-    const monthNames = [
-      "Jan", 
-      "Feb", 
-      "Mar", 
-      "Apr", 
-      "May", 
-      "Jun", 
-      "Jul", 
-      "Aug", 
-      "Sep", 
-      "Oct", 
-      "Nov", 
-      "Dec"];
-
     const menu = comments.map((comment) => {
-      let date = new Date(comment.date); 
-      let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-      let year = date.getFullYear();
-      let month = monthNames[date.getMonth()];
-      let dateStr = month + ' ' + day + ', ' + year;
-
       return (
         <CardBody key={ comment.id } >
           <CardText>{ comment.comment }</CardText>
-          <CardText>-- { comment.author }, { dateStr }</CardText>
+          <CardText>-- { comment.author }, { new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date))) }</CardText>
         </CardBody>
       );
     });
@@ -57,14 +37,14 @@ class DishDetail extends Component {
   }
 
   render() {
-    if(this.props.selectedDish != null) {
+    if(this.props.dish != null) {
       return (
         <div className="row">
-          <div key={ this.props.selectedDish.id } className="col-12 col-md-5 m-1">
-            { this.renderDish(this.props.selectedDish) }
+          <div key={ this.props.dish.id } className="col-12 col-md-5 m-1">
+            { this.renderDish(this.props.dish) }
           </div>
           <div className="col-12 col-md-5 m-1">
-            { this.renderComments(this.props.selectedDish.comments) }
+            { this.renderComments(this.props.dish.comments) }
           </div>
         </div>
       );
