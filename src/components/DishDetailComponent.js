@@ -34,12 +34,14 @@ function RenderDish({ dish }) {
 const DishDetail = (props) => {
   if(props.dish != null) {
     return (
-      <div className="row">
-        <div key={ props.dish.id } className="col-12 col-md-5 m-1">
-          <RenderDish dish={ props.dish } />
-        </div>
-        <div className="col-12 col-md-5 m-1">
-          <RenderComments comments={ props.dish.comments } />
+      <div className="container">
+        <div className="row">
+          <div key={ props.dish.id } className="col-12 col-md-5 m-1">
+            <RenderDish dish={ props.dish } />
+          </div>
+          <div className="col-12 col-md-5 m-1">
+            <RenderComments comments={ props.dish.comments } />
+          </div>
         </div>
       </div>
     );
